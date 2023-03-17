@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Liberia.Application\Liberia.Application.csproj" />
+    <ProjectReference Include="..\Libreria.Domain\Libreria.Domain.csproj" />
+    <ProjectReference Include="..\Libreria.Persistence\Libreria.Persistence.csproj" />
+  </ItemGroup>
+
+</Project>

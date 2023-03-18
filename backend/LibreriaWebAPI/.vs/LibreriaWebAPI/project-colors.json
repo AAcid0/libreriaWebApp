@@ -1,0 +1,26 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "b0b59818-d085-4086-81a1-4bbb9684035b": {
+      "ProjectGuid": "b0b59818-d085-4086-81a1-4bbb9684035b",
+      "DisplayName": "Libreria.API",
+      "ColorIndex": 0
+    },
+    "b45352d1-ad0e-4286-b9f7-fabd4c8371c2": {
+      "ProjectGuid": "b45352d1-ad0e-4286-b9f7-fabd4c8371c2",
+      "DisplayName": "Liberia.Application",
+      "ColorIndex": 1
+    },
+    "71902d03-41c1-45a1-aefc-1986ab7461b4": {
+      "ProjectGuid": "71902d03-41c1-45a1-aefc-1986ab7461b4",
+      "DisplayName": "Libreria.Domain",
+      "ColorIndex": 2
+    },
+    "b95eba6f-b14f-40b8-86c1-952f41cb2e22": {
+      "ProjectGuid": "b95eba6f-b14f-40b8-86c1-952f41cb2e22",
+      "DisplayName": "Libreria.Persistence",
+      "ColorIndex": 3
+    }
+  },
+  "NextColorIndex": 4
+}

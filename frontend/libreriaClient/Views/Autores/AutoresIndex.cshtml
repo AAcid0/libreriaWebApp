@@ -1,0 +1,57 @@
+﻿@model IEnumerable<libreriaClient.Models.Autores.Autor>
+@{
+}
+@*Buscador*@
+<div class="container">
+    <div class="row justify-content-center">
+    <div class="col-md-8">
+        <form method="get" class="form-inline my-2 my-lg-0">
+        <div class="input-group">
+            <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar" name="keyword">
+            <div class="input-group-append">
+            <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" asp-action="GetAutoresByKeyword">Buscar</button>
+            </div>
+        </div>
+        </form>
+    </div>
+    </div>
+</div>
+<br/>
+<br/>
+<a href="@Url.Action("AutoresForm", "Autores", new { })">
+    <button class="btn btn-outline-secondary my-2 my-sm-0">Crear autor</button>
+    </a>
+<br/>
+<br/>
+@if (Model != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Año de nacimiento</th>
+                <th>Ciudad de origen</th>
+                <th>Correo electrónico</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.DateBorn.ToUniversalTime().ToString("yyyy'-'MM'-'dd")</td>
+                    <td>@item.City</td>
+                    <td>@item.Email</td>
+                    <td><a href="@Url.Action("AutoresForm", "Autores", new {autorId = item.Id})"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                    <td><a href="@Url.Action("DeleteAutor", "Autores", new {id = item.Id})"><i class="fa-solid fa-trash"></i></a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h3>Por favor ingrese una palabra clave en el buscador.</h3> 
+}

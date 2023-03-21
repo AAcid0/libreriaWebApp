@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Libreria.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/autores")]
     [ApiController]
     public class AutoresController : ControllerBase
     {
@@ -16,10 +16,22 @@ namespace Libreria.API.Controllers
             _autoresRepositorio = autoresRepositorio;
         }
 
-        [HttpGet("by-name/{name}")]
-        public async Task<IActionResult> GetAutorByName(string name)
+        [HttpGet]
+        public async Task<IActionResult> GetAllAutores()
         {
-            return Ok(await _autoresRepositorio.GetAutorByName(name));
+            return Ok(await _autoresRepositorio.GetAllAutores());  
+        }
+
+        [HttpGet("by-id/{Id}")]
+        public async Task<IActionResult> GetAutorById(long Id)
+        {
+            return Ok(await _autoresRepositorio.GetAutorById(Id));
+        }
+
+        [HttpGet("by-keyword/{keyword}")]
+        public async Task<IActionResult> GetAutorByName(string keyword)
+        {
+            return Ok(await _autoresRepositorio.GetAutorByKeyword(keyword));
         }
 
         [HttpPost]
@@ -34,6 +46,21 @@ namespace Libreria.API.Controllers
             var insert = await _autoresRepositorio.CreateAutor(autor);
 
             return Created("created", insert);
+        }
+
+        [HttpPut("update/{Id}")]
+        public async Task<IActionResult> UpdateAutor(long Id, Autor autor)
+        {
+            if(!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            return Ok(await _autoresRepositorio.UpdateAutor(autor));
+        }
+
+        [HttpDelete("delete/{Id}")]
+        public async Task<IActionResult> DeleteAutor(long Id)
+        {
+            return Ok(await _autoresRepositorio.DeleteAutor(Id));
         }
     }
 }

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Libreria.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/libros")]
     [ApiController]
     public class LibrosController : ControllerBase
     {
@@ -22,7 +22,7 @@ namespace Libreria.API.Controllers
             return Ok(await _librosRepositorio.GetAllLibros());
         }
 
-        [HttpGet("by-name/{name}")]
+        [HttpGet("by-keyword/{name}")]
         public async Task<IActionResult> GetLibroByName(string name)
         {
             return Ok(await _librosRepositorio.GetLibroByName(name));

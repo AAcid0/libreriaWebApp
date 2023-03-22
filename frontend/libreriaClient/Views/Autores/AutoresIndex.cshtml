@@ -34,6 +34,7 @@
                 <th>Correo electrónico</th>
                 <th>Editar</th>
                 <th>Eliminar</th>
+                <th>Libros</th>
             </tr>
         </thead>
         <tbody>
@@ -46,6 +47,7 @@
                     <td>@item.Email</td>
                     <td><a href="@Url.Action("AutoresForm", "Autores", new {autorId = item.Id})"><i class="fa-solid fa-pen-to-square"></i></a></td>
                     <td><a href="@Url.Action("DeleteAutor", "Autores", new {id = item.Id})"><i class="fa-solid fa-trash"></i></a></td>
+                    <td><a href="@Url.Action("GetLibrosByAuthor", "Libros", new {AuthorId = item.Id})">Ver</a></td>
                 </tr>
             }
         </tbody>

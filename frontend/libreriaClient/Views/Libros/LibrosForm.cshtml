@@ -1,24 +1,70 @@
-﻿@{
+﻿@model libreriaClient.Models.Libros.Libro
+@{
 }
-<div class="container">
-    <h2>Formulario</h2>
-    <form>
-        <div class="form-group">
-            <label for="nombre">Nombre:</label>
-            <input type="text" class="form-control" id="nombre" placeholder="Ingresa tu nombre">
-        </div>
-        <div class="form-group">
-            <label for="apellido">Apellido:</label>
-            <input type="text" class="form-control" id="apellido" placeholder="Ingresa tu apellido">
-        </div>
-        <div class="form-group">
-            <label for="edad">Edad:</label>
-            <input type="number" class="form-control" id="edad" placeholder="Ingresa tu edad">
-        </div>
-        <div class="form-group">
-            <label for="telefono">Teléfono:</label>
-            <input type="number" class="form-control" id="telefono" placeholder="Ingresa tu teléfono">
-        </div>
-        <button type="submit" class="btn btn-primary">Enviar</button>
-    </form>
+<div class="container col-6">
+    @if(Model != null)
+    {
+        <h2>Actualizar libro</h2>
+        <form action="UpdateLibro" method="post">
+            <input hidden type="text" class="form-control" id="Id" name="Id" value=@Model.Id>
+
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" class="form-control" id="nombre" name="Nombre" value="@Model.Name" placeholder="Nombre del libro">
+                @Html.ValidationMessageFor(x => x.Name)
+            </div>
+            <div class="form-group">
+                <label for="ano">Año de lanzamiento</label>
+                <input type="number" class="form-control" id="ano" value=@Model.Year name="Year">
+            </div>
+            <div class="form-group">
+                <label for="autor">Autor</label>
+                @Html.DropDownList("AuthorId", (IEnumerable<SelectListItem>)ViewBag.AuthorId,"Elija uno", new { @class = "form-control" })
+                    
+            </div>
+            <div class="form-group">
+                <label for="genere">Género</label>
+                <input type="text" class="form-control" id="genere" name="Gender" value=@Model.Gender placeholder="Género literario del libro">
+            </div>
+            <div class="form-group">
+                <label for="pagescount">Cantidad páginas</label>
+                <input type="number" class="form-control" id="pagescount" name="PagesCount" value=@Model.PagesCount placeholder="Conteo total de páginas del libro">
+            </div>
+            <br />
+            <br />
+            <button type="submit" class="btn btn-primary">Actualizar</button>
+        </form>
+    }
+    else
+    {
+        <h2>Crear libro</h2>
+        <form action="CreateLibro" method="post">
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" class="form-control" id="nombre" name="Nombre" placeholder="Nombre del libro">
+                @Html.ValidationMessageFor(x => x.Name, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <label for="edad">Año de lanzamiento</label>
+                <input type="number" class="form-control" id="ano" name="Year">
+            </div>
+            <div class="form-group">
+                <label for="autor">Autor</label>
+                @Html.DropDownList("AuthorId", (IEnumerable<SelectListItem>)ViewBag.AuthorId,"Elija uno", new { @class = "form-control" })
+                    
+            </div>
+            <div class="form-group">
+                <label for="apellido">Género</label>
+                <input type="text" class="form-control" id="genere" name="Gender" placeholder="Género literario del libro">
+            </div>
+            <div class="form-group">
+                <label for="telefono">Cantidad páginas</label>
+                <input type="number" class="form-control" id="pagescount" name="PagesCount" placeholder="Conteo total de páginas del libro">
+            </div>
+            <br />
+            <br />
+            <button type="submit" class="btn btn-primary">Crear</button>
+        </form>
+    }
+
 </div>

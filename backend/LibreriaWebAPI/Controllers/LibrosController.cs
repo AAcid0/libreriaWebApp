@@ -22,10 +22,17 @@ namespace Libreria.API.Controllers
             return Ok(await _librosRepositorio.GetAllLibros());
         }
 
-        [HttpGet("by-keyword/{name}")]
-        public async Task<IActionResult> GetLibroByName(string name)
+
+        [HttpGet("by-id/{Id}")]
+        public async Task<IActionResult> GetLibroById(long id)
         {
-            return Ok(await _librosRepositorio.GetLibroByName(name));
+            return Ok(await _librosRepositorio.GetLibroById(id));
+        }
+
+        [HttpGet("by-keyword/{name}")]
+        public async Task<IActionResult> GetLibroByKeyword(string name)
+        {
+            return Ok(await _librosRepositorio.GetLibroByKeyword(name));
         }
 
         [HttpPost]
@@ -42,12 +49,32 @@ namespace Libreria.API.Controllers
             return Created("created", insert);
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> DeleteLibro(int id)
+        [HttpDelete("delete/{Id}")]
+        public async Task<IActionResult> DeleteLibro(int Id)
         {
-            await _librosRepositorio.DeleteLibro(new Libro { Id = id });
+            return Ok(await _librosRepositorio.DeleteLibro(Id));
 
-            return NoContent();
+        }
+
+        [HttpPut("update/{Id}")]
+        public async Task<IActionResult> UpdateLibro(long Id, Libro libro)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            return Ok(await _librosRepositorio.UpdateLibro(libro));
+        }
+
+        [HttpGet("by-autor/{authorId}")]
+        public async Task<IActionResult> GetLibrosByAuthorId(long authorId)
+        {
+            return Ok(await _librosRepositorio.GetLibrosByAuthorId(authorId));
+        }
+
+        [HttpDelete("delete-by-autor/{authorId}")]
+        public async Task<IActionResult> DeleteLibrosByAuthor(long authorId)
+        {
+            return Ok(await _librosRepositorio.DeleteLibrosByAuthorId(authorId));
         }
     }
 }

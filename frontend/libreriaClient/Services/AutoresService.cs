@@ -33,9 +33,12 @@ namespace libreriaClient.Services
             return false;
         }
 
-        public Task<IEnumerable<Autor>> GetAllAutores()
+        public async Task<IEnumerable<Autor>> GetAllAutores()
         {
-            throw new NotImplementedException();
+            var response = await _client.GetAsync(BasePath);
+            response.EnsureSuccessStatusCode();
+
+            return await response.ReadContentAsync<List<Autor>>();
         }
 
         public async Task<Autor> GetAutorById(long id)
@@ -44,6 +47,7 @@ namespace libreriaClient.Services
             {
                 var response = await _client.GetAsync(BasePath + $"/by-id/{id}");
                 response.EnsureSuccessStatusCode();
+
                 return await response.ReadContentAsync<Autor>();
             }
 
@@ -61,6 +65,15 @@ namespace libreriaClient.Services
         public async Task<bool> DeleteAutor(long id)
         {
             var response = await _client.DeleteAsync(BasePath + $"/delete/{id}");
+
+            if (response.IsSuccessStatusCode)
+                return true;
+            return false;
+        }
+
+        public async Task<bool> DeleteLibrosByAutor(long Authorid)
+        {
+            var response = await _client.DeleteAsync($"/api/libros/delete-by-autor/{Authorid}");
 
             if (response.IsSuccessStatusCode)
                 return true;

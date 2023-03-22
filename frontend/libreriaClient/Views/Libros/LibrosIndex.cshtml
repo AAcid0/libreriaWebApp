@@ -1,4 +1,4 @@
-﻿@model IEnumerable<libreriaClient.Models.LibrosModel>
+﻿@model IEnumerable<libreriaClient.Models.Libros.Libro>
 @{
 }
 @*Buscador*@
@@ -9,7 +9,7 @@
         <div class="input-group">
             <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar" name="keyword">
             <div class="input-group-append">
-            <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" asp-action="GetLibrosByName">Buscar</button>
+            <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" asp-action="GetLibrosByKeyword">Buscar</button>
             </div>
         </div>
         </form>
@@ -18,7 +18,9 @@
 </div>
 <br/>
 <br/>
-<button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" asp-action="GetLibrosByName">Buscar</button>
+<a href="@Url.Action("LibrosForm", "Libros", new { })">
+    <button class="btn btn-outline-secondary my-2 my-sm-0">Crear libro</button>
+    </a>
 <br/>
 <br/>
 @if (Model != null)
@@ -42,8 +44,8 @@
                     <td>@item.Year</td>
                     <td>@item.Gender</td>
                     <td>@item.PagesCount</td>
-                    <td><a asp-action="LibrosForm"><i class="fa-solid fa-pen-to-square"></i></a></td>
-                    <td><a href=""><i class="fa-solid fa-trash"></i></a></td>
+                    <td><a href="@Url.Action("LibrosForm", "Libros", new {libroId = item.Id})"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                    <td><a href="@Url.Action("DeleteLibro", "Libros", new {id = item.Id})"><i class="fa-solid fa-trash"></i></a></td>
                 </tr>
             }
         </tbody>

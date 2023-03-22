@@ -10,5 +10,6 @@ namespace libreriaClient.Services.Interfaces
         Task<bool> CreateAutor(Autor autor);
         Task<bool> UpdateAutor(Autor autor);
         Task<bool> DeleteAutor(long id);
+        Task<bool> DeleteLibrosByAutor(long Authorid);
     }
 }

@@ -84,7 +84,6 @@ namespace Libreria.Persistence.Repositories
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
         public async Task<Autor> GetAutorById(long id)
         {
             var db = dbConnection();
@@ -94,6 +93,11 @@ namespace Libreria.Persistence.Repositories
             return await db.QueryFirstOrDefaultAsync<Autor>(sql, new { });
         }
 
+        /// <summary>
+        /// Actualiza la información de un autor que llega por modelo
+        /// </summary>
+        /// <param name="autor"></param>
+        /// <returns></returns>
         public async Task<bool> UpdateAutor(Autor autor)
         {
             var db = dbConnection();

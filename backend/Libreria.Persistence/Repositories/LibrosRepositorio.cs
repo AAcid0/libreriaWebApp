@@ -69,13 +69,13 @@ namespace Libreria.Persistence.Repositories
         /// </summary>
         /// <param name="_name"></param>
         /// <returns></returns>
-        public async Task<Libro> GetLibroByName(string _name)
+        public async Task<IEnumerable<Libro>> GetLibroByName(string _name)
         {
             var db = dbConnection();
 
-            var sql = @"SELECT Id, AuthorId, Name, Year FROM libros WHERE Name = @name";
+            var sql = $"SELECT Id, AuthorId, Name, Year FROM libros WHERE Name LIKE '%{_name}%'";
 
-            return await db.QueryFirstOrDefaultAsync<Libro>(sql, new { name = _name });
+            return await db.QueryAsync<Libro>(sql, new { });
         }
     }
 }

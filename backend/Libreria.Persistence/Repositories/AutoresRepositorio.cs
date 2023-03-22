@@ -41,13 +41,13 @@ namespace Libreria.Persistence.Repositories
         /// </summary>
         /// <param name="autor"></param>
         /// <returns></returns>
-        public async Task<bool> DeleteAutor(Autor autor)
+        public async Task<bool> DeleteAutor(long id)
         {
             var db = dbConnection();
 
-            var sql = @"DELETE FROM autores WHERE Id = @id";
+            var sql = $"DELETE FROM autores WHERE Id = {id}";
 
-            var result = await db.ExecuteAsync(sql, new { id = autor.Id });
+            var result = await db.ExecuteAsync(sql, new { });
 
             return result > 0;
         }
@@ -70,13 +70,39 @@ namespace Libreria.Persistence.Repositories
         /// </summary>
         /// <param name="_name"></param>
         /// <returns></returns>
-        public async Task<Autor> GetAutorByName(string _name)
+        public async Task<IEnumerable<Autor>> GetAutorByKeyword(string keyword)
         {
             var db = dbConnection();
 
-            var sql = @"SELECT Id, Name, DATEBORN, City, Email FROM autores WHERE Name = @name";
+            var sql = $"SELECT Id, Name, DATEBORN, City, Email FROM autores WHERE Name LIKE '%{keyword}%'";
 
-            return await db.QueryFirstOrDefaultAsync<Autor>(sql, new { name = _name });
+            return await db.QueryAsync<Autor>(sql, new { });
+        }
+
+        /// <summary>
+        /// Obtiene información de un autor según su id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public async Task<Autor> GetAutorById(long id)
+        {
+            var db = dbConnection();
+
+            var sql = $"SELECT Id, Name, DATEBORN, City, Email FROM autores WHERE Id = {id}";
+
+            return await db.QueryFirstOrDefaultAsync<Autor>(sql, new { });
+        }
+
+        public async Task<bool> UpdateAutor(Autor autor)
+        {
+            var db = dbConnection();
+
+            var sql = $"UPDATE autores SET Name = '{autor.Name}', DATEBORN = '{autor.DateBorn.ToUniversalTime().ToString("yyyy'-'MM'-'dd")}', City = '{autor.City}', " +
+                $"Email = '{autor.Email}' WHERE Id = '{autor.Id}'";
+            var result = await db.ExecuteAsync(sql);
+
+            return result > 0;
         }
     }
 }

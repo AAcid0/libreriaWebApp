@@ -1,0 +1,29 @@
+﻿@model libreriaClient.Models.HomeModel;
+@{
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    @*Buscador*@
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <form method="post" class="form-inline my-2 my-lg-0">
+            <div class="input-group">
+              <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar" name="buscar">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Buscar</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    @*<p>@Model.Message</p>*@
+</body>
+</html>

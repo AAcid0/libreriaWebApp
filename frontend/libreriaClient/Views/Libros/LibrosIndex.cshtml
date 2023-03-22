@@ -1,0 +1,55 @@
+﻿@model IEnumerable<libreriaClient.Models.LibrosModel>
+@{
+}
+@*Buscador*@
+<div class="container">
+    <div class="row justify-content-center">
+    <div class="col-md-8">
+        <form method="get" class="form-inline my-2 my-lg-0">
+        <div class="input-group">
+            <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar" name="keyword">
+            <div class="input-group-append">
+            <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" asp-action="GetLibrosByName">Buscar</button>
+            </div>
+        </div>
+        </form>
+    </div>
+    </div>
+</div>
+<br/>
+<br/>
+<button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" asp-action="GetLibrosByName">Buscar</button>
+<br/>
+<br/>
+@if (Model != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Año lanzamiento</th>
+                <th>Género</th>
+                <th># de páginas</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Year</td>
+                    <td>@item.Gender</td>
+                    <td>@item.PagesCount</td>
+                    <td><a asp-action="LibrosForm"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                    <td><a href=""><i class="fa-solid fa-trash"></i></a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h3>Por favor ingrese una palabra clave en el buscador.</h3> 
+}
